@@ -17,14 +17,19 @@
   <h1 class="some-title">this is some title for test</h1>
   <input type="button" value="record action" onclick="record()" />
   <br />
+  <input type="button" value="alertmessage" onclick="alertmessage()" />
+  <br />
   <input type="button" value="replay action" onclick="replay()" />
   <div id="replaycontent">
 
   </div>
   <script>
     window.events = [];
-
+    function alertmessage(){
+      alert("dalongdemo")
+    }
     function record() {
+      console.log("click method call")
       rrweb.record({
         emit(event) {
           // 将 event 存入 events 数组中
