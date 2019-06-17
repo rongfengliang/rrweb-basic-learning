@@ -20,7 +20,12 @@
   <br />
   <input type="button" value="alertmessage" onclick="alertmessage()" />
   <br />
+  <input type="button" value="changedom layout" onclick="changelayout()" />
+  <br />
   <input type="button" value="replay action" onclick="replay()" />
+  <div id="addcontent">
+
+  </div>
   <div id="replaycontent">
 
   </div>
@@ -28,7 +33,15 @@
     window.events = [];
     function alertmessage(){
       alert("dalongdemo")
+      
     }
+    function changelayout(){
+       var el = document.getElementById("addcontent")
+       var h2el = document.createElement("h2"); 
+       h2el.innerHTML="this is a demo h2"
+       el.appendChild(h2el)
+    }
+
     function record() {
       console.log("click method call")
       rrweb.record({
