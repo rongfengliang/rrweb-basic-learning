@@ -12,4 +12,5 @@ services:
    volumes:
    - "./nginx_lua/:/opt/app/"
    - "./index.html:/usr/local/openresty/nginx/html/index.html"
+   - "./index.css:/usr/local/openresty/nginx/html/index.css"
    - "./nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf"
