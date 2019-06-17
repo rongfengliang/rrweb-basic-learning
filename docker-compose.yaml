@@ -1,5 +1,10 @@
 version: "3"
 services: 
+  imagebuild:
+    image: dalongrong/rrweb-demo
+    build: 
+      context: ./
+      dockerfile: ./Dockerfile-build
   app: 
    image: openresty/openresty:alpine-fat
    ports:

@@ -1,0 +1,4 @@
+FROM openresty/openresty:alpine-fat
+COPY nginx_lua/ /opt/app/
+COPY nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
+COPY index.html /usr/local/openresty/nginx/html/index.html
