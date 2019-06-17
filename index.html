@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>rrweb demo web site</title>
+  <script  crossorigin="anonymous"  src="https://cdn.jsdelivr.net/npm/rrweb@latest/dist/rrweb.min.js"></script>
+  <script  crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/rrweb@latest/dist/record/rrweb-record.min.js"></script>
+  <link rel="stylesheet" crossorigin="anonymous"
+    href="https://cdn.jsdelivr.net/npm/rrweb-player@latest/dist/style.css" />
+  <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/rrweb-player@latest/dist/index.js"></script>
+</head>
+
+<body>
+  <h1 class="some-title">this is some title for test</h1>
+  <input type="button" value="record action" onclick="record()" />
+  <br />
+  <input type="button" value="replay action" onclick="replay()" />
+  <div id="replaycontent">
+
+  </div>
+  <script>
+    window.events = [];
+
+    function record() {
+      rrweb.record({
+        emit(event) {
+          // 将 event 存入 events 数组中
+          events.push(event);
+        },
+      });
+    }
+
+    function replay() {
+      new rrwebPlayer({
+        target: document.getElementById("replaycontent"), // 可以自定义 DOM 元素
+        data: {
+          events,
+        },
+      });
+    }
+    // save 函数用于将 events 发送至后端存入，并重置 events 数组
+    function save() {
+      const body = JSON.stringify(window.events);
+      events = [];
+      fetch("http://localhost:8080/api", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body,
+      });
+    }
+    // 每 10 秒调用一次 save 方法，避免请求过多
+    setInterval(save, 10 * 1000);
+  </script>
+</body>
+
+</html>
